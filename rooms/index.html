@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Room Switching Webpage</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="backdrop">
+
+  </div>
+  <form class="modal">
+
+      <h1 id="title">Welcome</h1>
+      <br>
+      <p id="content">Enter Your User Name</p>
+      <br>
+
+      <input placeholder="Enter User Name" type="text">
+      <br>
+      <button>Submit</button>
+  </form>
+  <div class="all">
+
+    <nav>
+      <h1>Rooms</h1>
+      <ul id="room-list">
+        <li>
+  
+          <a id="general" href="#section1">general</a>
+  
+        </li>
+        
+      </ul>
+      <form>
+  
+        <input type="text" id="new-room" placeholder="Enter a room name">
+        <button type="button" onclick="addRoom()">create Room</button>
+      </form>
+      <input type="text" id="join-room" placeholder="Enter a room name">
+      <button type="button" onclick="joinRoom()">join Room</button>
+    </form>
+      <div class="activeusers">
+        <h2>Active Users</h2>
+        <ul id="users">
+     
+  
+        </ul>
+   <ul id="room-members"></ul>
+
+    </div>
+    </nav>
+    <main>
+    
+      
+      <div class="container">
+     
+        <div id="div">
+          <section class="active"  id="section1">
+            <div class="chatbox">
+              <ul id="messagelist">
+    
+              </ul>
+            
+              </div>
+          </section>
+       
+         
+        </div>
+        <div class="forsend">
+        
+            
+            <form class="Input" >
+                <input type="text" placeholder="Type your message ...">
+                <button>Send</button>
+            </form>
+        </div>
+        <br>
+       
+    </div>
+   
+  
+  
+    </main>
+       
+    <!-- <div class="room-members"></div> -->
+   
+</div>
+ 
+  <script>
+
+let general=document.getElementById('general')
+    // console.log(general)
+general.addEventListener('click',function(event) {
+ 
+  event.preventDefault();
+
+  userinfo['current-room']='general'
+  socket.emit('get-room-users','general')
+  // Hide all sections
+sections = document.querySelectorAll("section");
+sections.forEach(section => section.classList.remove("active"));
+  
+        // Hide all sections
+        console.log(userinfo)
+        
+        // Show the clicked section
+       
+        const id = this.getAttribute("href").substring(1);
+        // console.log(id,div)
+        // console.log(sections.length)
+        const element=document.getElementById(id)
+        // console.log(element)
+        document.getElementById(id).classList.add("active");
+  
+
+  // document.getElementById(id).classList.add("active");
+});
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
